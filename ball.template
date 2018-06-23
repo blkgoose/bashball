@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# useful variables (can be used in scripts)
+export _localdir="$( cd "$( dirname $0 )" && pwd )"
+export _tmpfolder="/tmp/bashball-$$"
+
+# override source function (cannot use .)
+source() {
+  path="$1"
+
+  if [[ "$path" =~ ^[a-zA-Z0-9] ]] ; then
+    . "$_tmpfolder/$path"
+  else
+    [[ "$path" == ..* ]] && cd $_localdir
+    . $path
+  fi
+  cd $_launchdir
+}
+export -f source
+
+# trap exit and delete temporary folder
+trap "rm -rf $_tmpfolder" EXIT
+
+# makes temporary folder
+mkdir -p $_tmpfolder
+
+# stores tar file in base64 format
+printf $'__TAR' | base64 -d | tar xz -C $_tmpfolder
+
+# executes main
+bash $_tmpfolder/main.sh "${@}"

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+files="${@}"
+
+[ -z "$files" ] && 
+  echo "usage: $(basename $0) <files>" &&
+  exit
+
+ball=$(cat << 'EOF'
+#!/bin/bash
+export _localdir="$( cd "$( dirname $0 )" && pwd )"; export _tmpfolder="/tmp/bashball-$$"; source() { path="$1"; if [[ "$path" =~ ^[a-zA-Z0-9] ]] ; then . "$_tmpfolder/$path"; else [[ "$path" == ..* ]] && cd $_localdir; . $path; fi; cd $_launchdir; }; export -f source; trap "rm -rf $_tmpfolder" EXIT; mkdir -p $_tmpfolder; printf $'__TAR' | base64 -d | tar xz -C $_tmpfolder; bash $_tmpfolder/main.sh "${@}"
+EOF
+)
+
+trap 'rm -f /tmp/ball.$$' EXIT
+echo "$ball" > /tmp/ball.$$
+
+sed -e "s#__TAR#$(tar -czf - $files | base64 -w0)#g" /tmp/ball.$$
