@@ -1,7 +1,7 @@
 # BashBall
 Tool for creating self-contained executable multi-file script.
 
-Add ##### bashball ###### to `/bin`, usage `bashball <scripts> > out.bb`.
+Add `bashball` to `/bin`, usage `bashball <scripts> > out.bb`.
 
 To run simply do `bash out.bb`.
 
