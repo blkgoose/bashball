@@ -14,7 +14,7 @@ source() {
     [[ "$path" == ..* ]] && cd $_localdir
     . $path
   fi
-  cd $_launchdir
+  cd $_localdir
 }
 export -f source
 
