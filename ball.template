@@ -24,8 +24,11 @@ trap "rm -rf $_tmpfolder" EXIT
 # makes temporary folder
 mkdir -p $_tmpfolder
 
-# stores tar file in base64 format
-printf $'__TAR' | base64 -d | tar xz -C $_tmpfolder
+# __TAR will be replaced with the base64 tarball content
+# this extracts the content of the tarball and puts it in the temporary folder
+printf $'
+__TAR
+' | base64 -d | tar xz -C $_tmpfolder
 
 # executes main
 bash $_tmpfolder/main.sh "${@}"
