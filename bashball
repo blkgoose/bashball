@@ -12,7 +12,7 @@ trap 'rm -rf $tmpdir' EXIT
 
 cat << 'EOF' > "$tmpdir/ball"
 #!/bin/bash
-export _localdir="$( cd "$( dirname $0 )" && pwd )"; export _tmpfolder="/tmp/bashball-$$"; source() { path="$1"; if [[ "$path" =~ ^[a-zA-Z0-9] ]] ; then . "$_tmpfolder/$path"; else [[ "$path" == ..* ]] && cd $_localdir; . $path; fi; cd $_launchdir; }; export -f source; trap "rm -rf $_tmpfolder" EXIT; mkdir -p $_tmpfolder; printf $'
+export _localdir="$( cd "$( dirname $0 )" && pwd )"; export _tmpfolder="/tmp/bashball-$$"; source() { path="$1"; if [[ "$path" =~ ^[a-zA-Z0-9] ]] ; then . "$_tmpfolder/$path"; else [[ "$path" == ..* ]] && cd $_tmpdir; . $path; fi; cd $_launchdir; }; export -f source; trap "rm -rf $_tmpfolder" EXIT; mkdir -p $_tmpfolder; printf $'
 __TAR
 ' | base64 -d | tar xz -C $_tmpfolder; bash $_tmpfolder/main.sh "${@}"
 EOF
