@@ -13,9 +13,9 @@ mkdir -p "$tmpdir"
 trap 'rm -rf $tmpdir' EXIT
 cat << 'EOF' > "$tmpdir/ball"
 #!/bin/bash
-set -e;declare -a apps=("tar base64");for app in $apps; do hash $app;done;export _localdir="$( cd "$( dirname $0 )" && pwd )";export _tmpfolder="/tmp/bashball-$$";source() { path="$1";cd $_tmpfolder;. "$path";cd $_localdir;};export -f source;trap "rm -rf $_tmpfolder" EXIT;mkdir -p $_tmpfolder;printf $'
+set -e;declare -a apps=("tar base64");for app in $apps; do hash $app;done;export _localdir="$( cd "$( dirname $0 )" && pwd )";export _tmpdir="/tmp/bashball-$$";source() { path="$1";cd $_tmpdir;. "$path";cd $_localdir;};export -f source;trap "rm -rf $_tmpdir" EXIT;mkdir -p $_tmpdir;printf $'
 __TAR
-' | base64 -d | tar xz -C $_tmpfolder;bash $_tmpfolder/main.sh "${@}";
+' | base64 -d | tar xz -C $_tmpdir;bash $_tmpdir/main.sh "${@}";
 EOF
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
 printf '%s\n' "/__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
