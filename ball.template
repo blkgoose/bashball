@@ -9,29 +9,29 @@ done
 
 # useful variables (can be used in scripts)
 export _localdir="$( cd "$( dirname $0 )" && pwd )"
-export _tmpfolder="/tmp/bashball-$$"
+export _tmpdir="/tmp/bashball-$$"
 
 # makes source function local
 source() {
   path="$1"
   
-	cd $_tmpfolder
+	cd $_tmpdir
 	. "$path"
 	cd $_localdir
 }
 export -f source
 
 # trap exit and delete temporary folder
-trap "rm -rf $_tmpfolder" EXIT
+trap "rm -rf $_tmpdir" EXIT
 
 # makes temporary folder
-mkdir -p $_tmpfolder
+mkdir -p $_tmpdir
 
 # __TAR will be replaced with the base64 tarball content
 # this extracts the content of the tarball and puts it in the temporary folder
 printf $'
 __TAR
-' | base64 -d | tar xz -C $_tmpfolder
+' | base64 -d | tar xz -C $_tmpdir
 
 # executes main
-bash $_tmpfolder/main.sh "${@}"
+bash $_tmpdir/main.sh "${@}"
