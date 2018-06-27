@@ -1,22 +1,31 @@
 #!/bin/bash
 set -e
+
 declare -a apps=("ed tar base64")
 for app in $apps; do
 	hash $app
 done
+
 files="${@}"
 [ -z "$files" ] &&
   echo "usage: $(basename $0) <files>" &&
   exit
+
 tmpdir="/tmp/bashball-$$/"
+
 mkdir -p "$tmpdir"
+
 trap 'rm -rf $tmpdir' EXIT
+
 cat << 'EOF' > "$tmpdir/ball"
 #!/bin/bash
 set -e;declare -a apps=("tar base64");for app in $apps; do hash $app;done;export _localdir="$( cd "$( dirname $0 )" && pwd )";export _tmpdir="/tmp/bashball-$$";source() { path="$1";cd $_tmpdir;. "$path";cd $_localdir;};export -f source;trap "rm -rf $_tmpdir" EXIT;mkdir -p $_tmpdir;printf $'
 __TAR
 ' | base64 -d | tar xz -C $_tmpdir;bash $_tmpdir/main.sh "${@}";
 EOF
+
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
+
 printf '%s\n' "/__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
+
 cat "$tmpdir/ball" | tr '\n' '\r' | sed 's/\r__TAR\r//' | sed 's/=\r/=/' | tr '\r' '\n'
