@@ -1,15 +1,7 @@
 #!/bin/bash
 set -e
 
-declare -a apps=("ed tar base64")
-for app in $apps; do
-	hash $app
-done
-
 files="${@}"
-[ -z "$files" ] &&
-  echo "usage: $(basename $0) <files>" &&
-  exit
 
 tmpdir="/tmp/bashball-$$/"
 
