@@ -18,6 +18,6 @@ EOF
 
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
 
-printf '%s\n' "/__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
+printf '%s\n' "/^__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
 
 cat "$tmpdir/ball" | tr '\n' '\r' | sed 's/\r__TAR\r//' | sed 's/=\r/=/' | tr '\r' '\n'
