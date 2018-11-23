@@ -11,13 +11,33 @@ done
 export _localdir="$( cd "$( dirname $0 )" && pwd )"
 export _tmpdir="/tmp/bashball-$$"
 
+# TODO: add import function
+import() {
+	path="$1.sh"
+	as="${2:-as}"
+	alias="${3}"
+	hash=$(echo "#bashball_import#" | md5sum | cut -c1-32)
+
+	[[ "$as" == "as" ]] && {
+		[[ "$alias" != '' ]] && alias="$alias."
+		[[ "$alias" =~ ' ' ]] && {
+			echo "ERROR: alias cannot contain spaces" 1>&2
+			exit 1
+		}
+
+		cd "$_tmpdir"
+		lib=$(sed "s/$hash/$alias/g" "$path")
+		eval "$lib"
+	} || {
+		echo "ERROR: import statement issues for $path" 1>&2
+		exit 1
+	}
+}
+export -f import
+
 # makes source function local
 source() {
-  path="$1"
-  
-	cd $_tmpdir
-	. "$path"
-	cd $_localdir
+	import $1
 }
 export -f source
 
