@@ -3,21 +3,14 @@ set -e
 
 files="${@}"
 
-tmpdir="/tmp/bashball-$$/"
-
 tmpdir="/tmp/bashball-$$"
 filedir="$tmpdir/files"
 mkdir -p "$tmpdir"
-
 mkdir -p "$filedir"
 trap 'rm -rf $tmpdir' EXIT
 
-cat << 'EOF' > "$tmpdir/ball"
-#!/bin/bash
-set -e;declare -a apps=("tar base64");for app in $apps; do hash $app;done;export _localdir="$( cd "$( dirname $0 )" && pwd )";export _tmpdir="/tmp/bashball-$$";source() { path="$1";cd $_tmpdir;. "$path";cd $_localdir;};export -f source;trap "rm -rf $_tmpdir" EXIT;mkdir -p $_tmpdir;printf $'
-__TAR
-' | base64 -d | tar xz -C $_tmpdir;bash $_tmpdir/main.sh "${@}";
-EOF
+cp "ball.template" "$tmpdir/ball"
+
 hash=$(echo "§bashball_import§" | md5sum | cut -c1-32)
 
 # import functionality
