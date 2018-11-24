@@ -9,7 +9,6 @@ for app in $apps; do hash $app 2>/dev/null || echo "$app is not installed on thi
 export _localdir="$( cd "$( dirname $0 )" && pwd )"
 export _tmpdir="/tmp/bashball-$$"
 
-# TODO: add import function
 import() {
 	path="$1.sh"
 	as="${2:-as}"
