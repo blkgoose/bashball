@@ -16,7 +16,7 @@ declare -a apps=(tar base64)
 for app in $apps; do hash $app 2>/dev/null || echo "$app is not installed on this system"; done
 
 # useful variables (can be used in scripts)
-export _localdir="$( cd "$( dirname $0 )" && pwd )"
+export _localdir="$PWD"
 export _tmpdir="/tmp/bashball-$$"
 
 import() {
