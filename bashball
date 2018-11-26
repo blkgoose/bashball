@@ -51,7 +51,7 @@ __TAR
 ' | base64 -d | tar xz -C $_tmpdir
 
 # executes main
-bash $_tmpdir/main.sh "${@}"
+bash $_tmpdir/main.sh ${@}
 EOF
 
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
