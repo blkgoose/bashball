@@ -16,25 +16,16 @@ declare -a apps=(tar base64)
 for app in $apps; do hash $app 2>/dev/null || echo "$app is not installed on this system"; done
 
 # useful variables (can be used in scripts)
-export _localdir="$PWD"
+export _localdir="$(pwd)"
 export _tmpdir="/tmp/bashball-$$"
-
-import() {
-	path="$1.sh"
-	as="${2:-as}"
-	alias="${3}"
-
-	[[ -n $alias ]] && alias="$alias."
-
-	cd "$_tmpdir"
-	lib=$(sed "s/\([[:alnum:]]\{1,\}()\)/$alias\1/g" "$path")
-	eval "$lib"
-}
-export -f import
 
 # makes source function local
 source() {
-	import $1
+	lib="$1"
+	[[ "$lib" =~ \.sh$ ]] || lib="$lib.sh"
+
+	cd "$_tmpdir"
+	. "$lib"
 }
 export -f source
 
