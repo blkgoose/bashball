@@ -4,9 +4,7 @@ set -e
 files="${@}"
 
 tmpdir="/tmp/bashball-$$"
-filedir="$tmpdir/files"
 mkdir -p "$tmpdir"
-mkdir -p "$filedir"
 trap 'rm -rf $tmpdir' EXIT
 
 cat > "$tmpdir/ball" <<'EOF'
@@ -25,12 +23,11 @@ import() {
 	path="$1.sh"
 	as="${2:-as}"
 	alias="${3}"
-	hash=$(echo "§bashball_import§" | md5sum | cut -c1-32)
 
 	[[ -n $alias ]] && alias="$alias."
 
 	cd "$_tmpdir"
-	lib=$(sed "s/$hash/$alias/g" "$path")
+	lib=$(sed "s/\([[:alnum:]]\{1,\}()\)/$alias\1/g" "$path")
 	eval "$lib"
 }
 export -f import
@@ -57,24 +54,13 @@ __TAR
 bash $_tmpdir/main.sh "${@}"
 EOF
 
-hash=$(echo "§bashball_import§" | md5sum | cut -c1-32)
-
-# import functionality
-for file in $files
-do
-	[[ "$file" == "main.sh" ]] &&
-		cp "$file" "$filedir" ||
-		sed "s/\s*function /function $hash/g" "$file" > "$filedir/$file"
-done
-
-cd $filedir
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
 
 printf '%s\n' "/^__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
 
 cat "$tmpdir/ball" |\
 tr '\n' '\r' |\
-sed -e 's/\r__TAR\r//' -e 's/=\r/=/' |\
+sed -e 's/\r__TAR\r//' -e 's/=\r/=/' -e "s/\r'/\'/g" |\
 tr '\r' '\n' |\
 sed -e '/^\s*#[^!].*/d' -e 's/\s*#[^!].*//g' -e '/^\s*$/d' |\
 tr '\n' ';' |\
