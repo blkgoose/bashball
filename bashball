@@ -39,7 +39,7 @@ mkdir -p $_tmpdir
 # this extracts the content of the tarball and puts it in the temporary folder
 printf $'
 __TAR
-' | base64 -d | tar xz -C $_tmpdir
+' | base64 -d | tar xz -C $_tmpdir --warning=no-timestamp
 
 # executes main
 bash $_tmpdir/main.sh ${@}
