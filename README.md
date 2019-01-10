@@ -1,4 +1,4 @@
-# BashBall
+# bashball
 Tool for creating self-contained executable multi-file script.
 
 Add `bashball` to `/bin`, usage `bashball <scripts> > out.bb`.
