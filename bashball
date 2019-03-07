@@ -26,6 +26,7 @@ source() {
 
 	cd "$_tmpdir"
 	. "$lib"
+    cd "$_localdir"
 }
 export -f source
 
@@ -42,7 +43,7 @@ __TAR
 ' | base64 -d | tar xz -C $_tmpdir --warning=no-timestamp
 
 # executes main
-bash $_tmpdir/main.sh ${@}
+bash <(cat <(echo 'cd $_localdir') $_tmpdir/main.sh) ${@}
 EOF
 
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
