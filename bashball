@@ -18,6 +18,7 @@ for app in $apps; do hash $app 2>/dev/null || echo "$app is not installed on thi
 # useful variables (can be used in scripts)
 export _localdir="$(pwd)"
 export _tmpdir="/tmp/bashball-$$"
+export _name="$(basename $0)"
 
 # makes source function local
 source() {
@@ -43,7 +44,7 @@ __TAR
 ' | base64 -d | tar xz -C $_tmpdir --warning=no-timestamp
 
 # executes main
-bash <(cat <(echo 'cd $_localdir') $_tmpdir/main.sh) ${@}
+bash -c "$(cat <(echo 'cd $_localdir') $_tmpdir/main.sh)" $_name ${@}
 EOF
 
 tar -czf - $files | base64 -w0 > "$tmpdir/tar"
