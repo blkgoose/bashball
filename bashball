@@ -8,7 +8,7 @@ mkdir -p "$tmpdir"
 trap 'rm -rf $tmpdir' EXIT
 
 cat > "$tmpdir/ball" <<'EOF'
-#!/bin/bash
+#!/usr/bin/env bash
 
 # check if apps are installed
 set -e
