@@ -23,7 +23,6 @@ export _name="$(basename $0)"
 # makes source function local
 source() {
 	lib="$1"
-	[[ "$lib" =~ \.sh$ ]] || lib="$lib.sh"
 
 	cd "$_tmpdir"
 	. "$lib"
