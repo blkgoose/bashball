@@ -46,7 +46,7 @@ __TAR
 bash -c "$(cat <(echo 'cd $_localdir') $_tmpdir/main.sh)" $_name ${@}
 EOF
 
-tar -czf - $files | base64 -w0 > "$tmpdir/tar"
+tar -czf - $files | base64 | tr '\n' '\r' | sed 's \r  g' > "$tmpdir/tar"
 
 printf '%s\n' "/^__TAR/r $tmpdir/tar" w | ed "$tmpdir/ball" 1>/dev/null 2>&1
 
