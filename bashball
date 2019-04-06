@@ -3,6 +3,16 @@ set -e
 
 files="${@}"
 
+has_main=false
+for f in $files; do
+    [[ $f == "main.sh" ]] && has_main=true
+done
+
+$has_main || {
+    echo "ERROR: cannot create bashball without main.sh"
+    exit 1
+}
+
 tmpdir="/tmp/bashball-$$"
 mkdir -p "$tmpdir"
 trap 'rm -rf $tmpdir' EXIT
