@@ -1,7 +1,24 @@
 #!/bin/bash
-set -e
+
+source "optparse/optparse.sh"
+
+optparse_usage_header="[option...] file..."
+optparse.define short=d long=decompile variable=decomp desc="bashball to decompile" default=""
+. $(optparse.build)
+
+set -euo pipefail
+
+[[ -n ${decomp:-} ]] && {
+    grep -oP "(?<=printf \\$').*?(?=')" "$decomp" |\
+    base64 -d |\
+    tar xz
+
+    exit 0
+}
 
 files="${@}"
+
+[[ -z ${files:-} ]] && usage
 
 has_main=false
 for f in $files; do
