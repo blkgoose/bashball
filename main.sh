@@ -9,9 +9,12 @@ optparse.define short=d long=decompile variable=decomp desc="bashball to decompi
 set -euo pipefail
 
 [[ -n ${decomp:-} ]] && {
+    out="${decomp#*.bb}_dec"
+    mkdir "$out"
+
     grep -oP "(?<=printf \\$').*?(?=')" "$decomp" |\
     base64 -d |\
-    tar xz
+    tar xz -C "$out"
 
     exit 0
 }
