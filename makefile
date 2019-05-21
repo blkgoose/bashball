@@ -1,6 +1,7 @@
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := cleanbuild
 
 build: main.sh
+cleanbuild: clean build
 	@echo -n "building..."
 	@mv main.sh sourceMain.sh
 	@sed -e 's <VERSION> XXX ' -e 's <VERSION_DATE> YYYY/MM/dd ' sourceMain.sh > main.sh
