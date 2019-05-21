@@ -1,0 +1,26 @@
+{
+  "name": "bashball",
+  "version": "1.0.0",
+  "description": "Tool for creating self-contained executable multi-file script.",
+  "main": "main.sh",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "bash bashball --version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blkgoose/bashball.git"
+  },
+  "keywords": [
+    "bash",
+    "tar"
+  ],
+  "author": "Alessio Biancone",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/blkgoose/bashball/issues"
+  },
+  "homepage": "https://github.com/blkgoose/bashball#readme"
+}
