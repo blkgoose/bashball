@@ -10,3 +10,7 @@ build: main.sh
 
 compile: main.sh optparse/optparse.sh
 	@bashball main.sh optparse/optparse.sh
+
+clean:
+	@rm -f bashball
+	@mv -f sourceMain.sh main.sh 2>/dev/null | true
