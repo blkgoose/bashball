@@ -10,7 +10,7 @@ optparse.define short=v long=version   variable=vers   desc="display bashball ve
 set -euo pipefail
 
 $vers && {
-    echo "bashball, version <VERSION> (<VERSION_DATE>)"
+    echo "bashball, version <VERSION>"
     exit 0
 }
 
