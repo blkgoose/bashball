@@ -5,7 +5,7 @@ source "optparse/optparse.sh"
 optparse_usage_header="[option...] file..."
 optparse.define short=d long=decompile variable=decomp desc="bashball to decompile"    default=""
 optparse.define short=v long=version   variable=vers   desc="display bashball version" flag
-. $(optparse.build)
+. <(optparse.build)
 
 set -euo pipefail
 
