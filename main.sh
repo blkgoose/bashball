@@ -9,6 +9,15 @@ optparse.define short=v long=version   variable=vers   desc="display bashball ve
 
 set -euo pipefail
 
+# check that required apps are present on system
+declare -a apps=("tar" "base64" "ed" "sed" "tr" "prova")
+for app in ${apps[@]}; do
+    hash $app 2>/dev/null || {
+        echo "ERROR: [$app] is missing from system"
+        exit 1
+    }
+done
+
 $vers && {
     echo "bashball, version <VERSION>"
     exit 0
@@ -48,8 +57,8 @@ cat > "$tmpdir/ball" <<'EOF'
 
 # check if apps are installed
 set -e
-declare -a apps=(tar base64)
-for app in $apps; do hash $app 2>/dev/null || echo "$app is not installed on this system"; done
+declare -a apps=("tar" "base64")
+for app in ${apps[@]}; do hash $app 2>/dev/null || { echo "$app is not installed on this system"; exit 1; }; done
 
 # useful variables (can be used in scripts)
 export _localdir="$(pwd)"
