@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/blkgoose/bashball/compare/v1.0.0...v1.1.0) (2019-06-25)
+
+
+### Features
+
+* **optparse:** Using in-memory option parsing ([d6eebae](https://github.com/blkgoose/bashball/commit/d6eebae))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2019-06-25)
 
