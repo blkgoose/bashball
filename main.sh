@@ -10,7 +10,7 @@ optparse.define short=v long=version   variable=vers   desc="display bashball ve
 set -euo pipefail
 
 # check that required apps are present on system
-declare -a apps=("tar" "base64" "ed" "sed" "tr" "prova")
+declare -a apps=("tar" "base64" "ed" "sed" "tr")
 for app in ${apps[@]}; do
     hash $app 2>/dev/null || {
         echo "ERROR: [$app] is missing from system" >&2
