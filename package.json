@@ -1,6 +1,6 @@
 {
   "name": "bashball",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Tool for creating self-contained executable multi-file script.",
   "main": "main.sh",
   "directories": {
