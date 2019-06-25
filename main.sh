@@ -13,7 +13,7 @@ set -euo pipefail
 declare -a apps=("tar" "base64" "ed" "sed" "tr" "prova")
 for app in ${apps[@]}; do
     hash $app 2>/dev/null || {
-        echo "ERROR: [$app] is missing from system"
+        echo "ERROR: [$app] is missing from system" >&2
         exit 1
     }
 done
@@ -44,7 +44,7 @@ for f in $files; do
 done
 
 $has_main || {
-    echo "ERROR: cannot create bashball without main.sh"
+    echo "ERROR: cannot create bashball without main.sh" >&2
     exit 1
 }
 
