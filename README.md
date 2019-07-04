@@ -11,12 +11,12 @@ Tool for creating self-contained executable multi-file script.
 bashball main.sh .. <other_scripts> > out.bb
 ```
 
+To run simply do `bash out.bb`.
+
 #### Run scripts during developement:
 ```bash
 bash <(bashball main.sh .. <other_scripts>)
 ```
-
-To run simply do `bash out.bb`.
 
 ### Extract script from bashball
 Use `bashball -d <file> > <file>.tar` to extract the sources of a bashball script in a tar file.
