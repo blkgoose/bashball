@@ -9,6 +9,13 @@ optparse.define short=v long=version   variable=vers   desc="display bashball ve
 
 set -euo pipefail
 
+# check that is not outputting to a terminal
+[ -t 1 ] && {
+    echo "ERROR: refusing to output to terminal"
+    exit 1
+}
+
+
 # check that required apps are present on system
 declare -a apps=("tar" "base64" "ed" "sed" "tr")
 for app in ${apps[@]}; do
