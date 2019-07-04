@@ -1,7 +1,20 @@
 # bashball
 Tool for creating self-contained executable multi-file script.
 
-Add `bashball` to `/bin`, usage `bashball <scripts> > out.bb`.
+### How to install:
++ Download [bashball](https://github.com/blkgoose/bashball/releases/latest/download/bashball)
++ Add `bashball` to `/bin`.
+
+### Usage:
+##### Build:
+```bash
+bashball main.sh .. <other_scripts> > out.bb
+```
+
+#### Run scripts during developement:
+```bash
+bash <(bashball main.sh .. <other_scripts>)
+```
 
 To run simply do `bash out.bb`.
 
