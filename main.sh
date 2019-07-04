@@ -23,12 +23,6 @@ $vers && {
     exit 0
 }
 
-# check that is not outputting to a terminal
-[ -t 1 ] && {
-    echo "ERROR: refusing to output to terminal"
-    exit 1
-}
-
 [[ -n ${decomp:-} ]] && {
     grep -oP "(?<=printf \\$').*?(?=')" "$decomp" |\
     base64 -d
@@ -39,6 +33,12 @@ $vers && {
 files="${@}"
 
 [[ -z ${files:-} ]] && usage
+
+# check that is not outputting to a terminal
+[ -t 1 ] && {
+    echo "ERROR: refusing to output to terminal"
+    exit 1
+}
 
 has_main=false
 for f in $files; do
