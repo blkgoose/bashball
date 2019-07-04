@@ -31,12 +31,8 @@ $vers && {
 }
 
 [[ -n ${decomp:-} ]] && {
-    out="${decomp#*.bb}_dec"
-    mkdir "$out"
-
     grep -oP "(?<=printf \\$').*?(?=')" "$decomp" |\
-    base64 -d |\
-    tar xz -C "$out"
+    base64 -d
 
     exit 0
 }
