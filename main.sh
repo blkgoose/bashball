@@ -3,8 +3,9 @@
 source "optparse/optparse.sh"
 
 optparse_usage_header="[option...] file..."
-optparse.define short=d long=decompile variable=decomp desc="bashball to decompile"    default=""
-optparse.define short=v long=version   variable=vers   desc="display bashball version" flag
+optparse.define short=d long=decompile variable=decomp desc="bashball to decompile"                              default=""
+optparse.define short=e long=edit      variable=edit   desc="edit bashball internals with default system editor" default=""
+optparse.define short=v long=version   variable=vers   desc="display bashball version"                           flag
 . <(optparse.build)
 
 set -euo pipefail
@@ -118,6 +119,39 @@ $vers && {
 # decompression
 [[ -n ${decomp:-} ]] && {
     bb_dec "$decomp"
+
+    exit 0
+}
+
+# edit
+[[ -n ${edit:-} ]] && {
+    [ -z ${EDITOR:-} ] && {
+        echo "ERROR: no editor specified, cannot edit"
+        exit 1
+    }
+
+    case $edit in
+        /*) edit="$edit"
+            ;;
+        *)  edit="$(pwd)/$edit"
+            ;;
+    esac
+
+    # preparing folders
+    mkdir -p "$tmpdir/edit"
+    mkdir -p "$tmpdir/edit/build"
+
+    # decompress
+    bb_dec "$edit" > "$tmpdir/edit/file.tar.gz"
+    cd "$tmpdir/edit"
+
+    # edit
+    $EDITOR "file.tar.gz"
+
+    # rebuild
+    tar -C "$tmpdir/edit/build" -xzf "file.tar.gz"
+    cd "$tmpdir/edit/build"
+    bb_build "$(find * -type f)" > $edit
 
     exit 0
 }
