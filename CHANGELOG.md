@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/blkgoose/bashball/compare/v1.3.2...v1.4.0) (2019-07-05)
+
+
+### Features
+
+* Added edit mode ([2a05268](https://github.com/blkgoose/bashball/commit/2a05268))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/blkgoose/bashball/compare/v1.3.1...v1.3.2) (2019-07-04)
 
