@@ -2,6 +2,9 @@
 
 VERSION := $(shell grep '\"version\":' package.json | cut -d':' -f2 | grep -oP '(\d+\.){2}\d+')
 
+init:
+	git config core.hooksPath .githooks
+
 cleanbuild: clean build
 
 build: main.sh package.json
