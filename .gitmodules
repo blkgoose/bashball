@@ -4,3 +4,6 @@
 [submodule "bashball-install/optparse"]
 	path = bashball-install/optparse
 	url = https://github.com/blkgoose/optparse.git
+[submodule "install/optparse"]
+	path = install/optparse
+	url = https://github.com/blkgoose/optparse.git
