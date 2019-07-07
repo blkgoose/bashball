@@ -35,4 +35,14 @@ echo "starting download for bashball:[${release}] in ${outdir}"
 
 sudo wget ${wgetopt} ${dl_link} -O ${outdir}
 
-echo "bashball installed correctly"
+case $? in
+    0) echo "bashball installed correctly" ;;
+    1) echo "error during download" >&2 ;;
+    2) echo "error during argument parsing" >&2 ;;
+    3) echo "error during write operation" >&2 ;;
+    4) echo "error during network operation" >&2 ;;
+    5) echo "error during ssl verification" >&2 ;;
+    6) echo "error during username/password authentication" >&2 ;;
+    7) echo "wget protocol error" >&2 ;;
+    8) echo "release doesn't exist" >&2 ;;
+esac
