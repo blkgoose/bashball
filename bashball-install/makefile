@@ -7,5 +7,5 @@ compile: main.sh optparse/optparse.sh
 
 build:
 	@echo -n "building... "
-	@make -s compile > install.bb
+	@make -s compile > ../index.html
 	@echo "done"
