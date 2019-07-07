@@ -5,11 +5,11 @@ Tool for creating self-contained executable multi-file script.
 #### Automatically:
 + Run
 ```bash
-bash <(curl -L 'https://blkgoose.github.io/bashball/')
+bash <(curl -L 'https://tinyurl.com/yxlx25wt')
 ```
 It will install bashball on /bin/bashball, to change behaviour, see `--help`:
 ```bash
-bash <(curl -L 'https://blkgoose.github.io/bashball/') --help
+bash <(curl -L 'https://tinyurl.com/yxlx25wt') --help
 ```
 
 #### Manually:
