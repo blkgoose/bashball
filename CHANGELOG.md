@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/blkgoose/bashball/compare/v1.5.2...v1.6.0) (2019-07-07)
+
+
+### Features
+
+* **install:** Added error messages ([a81c095](https://github.com/blkgoose/bashball/commit/a81c095))
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/blkgoose/bashball/compare/v1.5.1...v1.5.2) (2019-07-07)
 
