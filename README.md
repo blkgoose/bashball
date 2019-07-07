@@ -3,11 +3,11 @@ Tool for creating self-contained executable multi-file script.
 
 ### How to install:
 #### Automatically:
-+ Run
++ To install bashball on /bin/bashball
 ```bash
 bash <(curl -Ls 'https://tinyurl.com/yxlx25wt')
 ```
-It will install bashball on /bin/bashball, to change behaviour, see `--help`:
++ To customize installation paths and behaviours, see `--help`
 ```bash
 bash <(curl -Ls 'https://tinyurl.com/yxlx25wt') --help
 ```
