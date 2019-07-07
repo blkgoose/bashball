@@ -2,6 +2,17 @@
 Tool for creating self-contained executable multi-file script.
 
 ### How to install:
+#### Automatically:
++ Run
+```bash
+bash <(curl -L 'https://blkgoose.github.io/bashball/')
+```
+It will install bashball on /bin/bashball, to change behaviour, see `--help`:
+```bash
+bash <(curl -L 'https://blkgoose.github.io/bashball/') --help
+```
+
+#### Manually:
 + Download [bashball](https://github.com/blkgoose/bashball/releases/latest/download/bashball)
 + Add `bashball` to `/bin`.
 
