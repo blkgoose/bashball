@@ -31,5 +31,5 @@ set -euo pipefail
     dl_link="https://github.com/blkgoose/bashball/releases/download/v${release}/bashball"
 }
 
-echo "starting download for bashball v${release} in ${outdir}"
+echo "starting download for bashball:[${release}] in ${outdir}"
 sudo wget ${wgetopt} ${dl_link} -O ${outdir}
