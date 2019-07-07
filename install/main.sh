@@ -2,7 +2,7 @@
 
 source "optparse/optparse.sh"
 
-optparse_usage_header="[option...] file..."
+optparse_usage_header="[option...]"
 optparse.define\
     long=release\
     variable=release\
