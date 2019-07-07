@@ -33,7 +33,11 @@ set -euo pipefail
 
 echo "starting download for bashball:[${release}] in ${outdir}"
 
-sudo wget ${wgetopt} ${dl_link} -O ${outdir} || {
+tmpdir="/tmp/install-bb-$$/"
+trap "rm -rf $tmpdir" EXIT
+mkdir -p "$tmpdir"
+
+wget ${wgetopt} ${dl_link} -O "${tmpdir}/bashball" || {
     case $? in
         1) echo "ERROR: error during download" >&2 ;;
         2) echo "ERROR: error during argument parsing" >&2 ;;
@@ -45,4 +49,7 @@ sudo wget ${wgetopt} ${dl_link} -O ${outdir} || {
         8) echo "ERROR: release doesn't exist" >&2 ;;
     esac
     exit 1
-} && echo "bashball installed correctly"
+} && {
+    sudo mv "$tmpdir/bashball" "$outdir"
+    echo "bashball installed correctly"
+}
