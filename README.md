@@ -5,11 +5,11 @@ Tool for creating self-contained executable multi-file script.
 #### Automatically:
 + To install bashball on /bin/bashball
 ```bash
-bash <(curl -Ls 'https://tinyurl.com/yxlx25wt')
+curl -Ls 'https://tinyurl.com/yxlx25wt' | sudo bash
 ```
 + To customize installation paths and behaviours, see `--help`
 ```bash
-bash <(curl -Ls 'https://tinyurl.com/yxlx25wt') --help
+curl -Ls 'https://tinyurl.com/yxlx25wt' | sudo bash -s -- --help
 ```
 
 #### Manually:
