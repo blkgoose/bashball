@@ -32,4 +32,7 @@ set -euo pipefail
 }
 
 echo "starting download for bashball:[${release}] in ${outdir}"
+
 sudo wget ${wgetopt} ${dl_link} -O ${outdir}
+
+echo "bashball installed correctly"
