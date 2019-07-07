@@ -19,7 +19,7 @@ optparse.define\
     long=directory\
     variable=outdir\
     desc="where to install bashball"\
-    default="/bin/bashball"
+    default="/usr/bin/"
 
 . <(optparse.build)
 
@@ -50,6 +50,8 @@ wget ${wgetopt} ${dl_link} -O "${tmpdir}/bashball" || {
     esac
     exit 1
 } && {
-    sudo mv "$tmpdir/bashball" "$outdir"
+    mv "$tmpdir/bashball" "$outdir/"
+    chmod +x "$outdir/bashball"
+
     echo "bashball installed correctly"
 }
