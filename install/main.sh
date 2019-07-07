@@ -25,7 +25,6 @@ optparse.define\
 
 set -euo pipefail
 
-
 [[ $release == 'latest' ]] && {
     dl_link="https://github.com/blkgoose/bashball/releases/latest/download/bashball"
 } || {
