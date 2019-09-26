@@ -51,7 +51,7 @@ __TAR
 ' | base64 -d | tar xz -C $_tmpdir --warning=no-timestamp
 
 # executes main
-bash -c "$(cat <(echo 'cd $_localdir') $_tmpdir/main.sh)" $_name ${@}
+bash -c "$(cat <(echo 'cd $_localdir') $_tmpdir/main.sh)" $_name "${@}"
 EOF
 
 # check that required apps are present on system
