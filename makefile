@@ -4,8 +4,9 @@ VERSION := $(shell grep '\"version\":' package.json | cut -d':' -f2 | grep -oP '
 
 init:
 	git config core.hooksPath .githooks
+	git submodule update --init
 
-cleanbuild: clean build
+cleanbuild: init clean build
 
 build: main.sh package.json
 	@echo -n "building..."
