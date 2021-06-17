@@ -3,8 +3,8 @@
 VERSION := $(shell grep '\"version\":' package.json | cut -d':' -f2 | grep -oP '(\d+\.){2}\d+')
 
 init:
-	git config core.hooksPath .githooks
-	git submodule update --init
+	@git config core.hooksPath .githooks
+	@git submodule update --init
 
 cleanbuild: init clean build
 
